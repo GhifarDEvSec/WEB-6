@@ -1,3 +1,8 @@
+import '@fontsource-variable/bricolage-grotesque'
+import '@fontsource-variable/dm-sans'
+import './styles/tokens.css'
+import './styles/base.css'
+import './styles/components.css'
 import { appConfig } from './config'
 import type { Task } from './types'
 import { addTask, getTasks } from './services/taskService'

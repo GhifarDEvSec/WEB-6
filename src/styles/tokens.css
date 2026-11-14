@@ -1,0 +1,46 @@
+:root {
+  --color-paper: #fbf6ec;
+  --color-surface: #fffdf8;
+  --color-ink: #1b2a41;
+  --color-ink-soft: #5a6578;
+  --color-accent: #ff6b35;
+  --color-highlight: #ffd166;
+  --color-success: #2e9e6b;
+  --color-danger: #d7263d;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --border-width: 2px;
+  --border: var(--border-width) solid var(--color-ink);
+  --border-dashed: var(--border-width) dashed var(--color-ink);
+
+  --shadow-offset: 6px 6px 0 var(--color-ink);
+  --shadow-offset-hover: 10px 10px 0 var(--color-ink);
+  --shadow-offset-pressed: 2px 2px 0 var(--color-ink);
+  --shadow-small: 3px 3px 0 var(--color-ink);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --text-xs: clamp(0.72rem, 0.69rem + 0.15vw, 0.8rem);
+  --text-sm: clamp(0.85rem, 0.81rem + 0.2vw, 0.95rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+  --text-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
+  --text-xl: clamp(1.4rem, 1.2rem + 0.9vw, 1.85rem);
+  --text-2xl: clamp(2.1rem, 1.5rem + 2.8vw, 3.6rem);
+
+  --font-heading: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --font-body: 'DM Sans Variable', system-ui, sans-serif;
+
+  --duration-fast: 140ms;
+  --duration-base: 280ms;
+  --easing: cubic-bezier(0.22, 1, 0.36, 1);
+}

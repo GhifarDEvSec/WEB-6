@@ -21,3 +21,8 @@ export interface AppConfig {
   appVersion: string
   basePath: string
 }
+
+export interface DueDateParts {
+  day: string
+  month: string
+}

@@ -15,6 +15,7 @@ export function renderTaskList(container: HTMLElement, tasks: Task[]): void {
   }
 
   const list = document.createElement('div')
+  list.classList.add('task-list')
 
   sortByDueDate(tasks).forEach((task) => {
     list.append(createTaskItem(task))

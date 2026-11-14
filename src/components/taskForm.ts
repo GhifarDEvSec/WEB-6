@@ -4,18 +4,32 @@ interface TaskFormOptions {
   onSubmit: (input: TaskInput) => void
 }
 
+type FormControl = HTMLInputElement | HTMLTextAreaElement
+
 function createField(
   labelText: string,
-  control: HTMLElement,
+  control: FormControl,
   errorMessage?: HTMLParagraphElement,
 ): HTMLDivElement {
   const wrapper = document.createElement('div')
+  wrapper.classList.add('field')
+
   const label = document.createElement('label')
-  label.append(document.createTextNode(labelText), control)
+  label.htmlFor = control.id
+  label.textContent = labelText
   wrapper.append(label)
 
   if (errorMessage) {
+    const errorId = `${control.id}-error`
+    errorMessage.id = errorId
+    errorMessage.classList.add('field-error')
     errorMessage.textContent = ''
+    control.setAttribute('aria-describedby', errorId)
+  }
+
+  wrapper.append(control)
+
+  if (errorMessage) {
     wrapper.append(errorMessage)
   }
 
@@ -26,32 +40,49 @@ export function renderTaskForm(container: HTMLElement, options: TaskFormOptions)
   container.replaceChildren()
 
   const form = document.createElement('form')
+  form.classList.add('task-form')
+
+  const heading = document.createElement('h2')
+  heading.classList.add('form-title')
+  heading.textContent = 'Form Tugas'
 
   const titleInput = document.createElement('input')
   titleInput.type = 'text'
   titleInput.name = 'title'
+  titleInput.id = 'task-title'
 
   const courseInput = document.createElement('input')
   courseInput.type = 'text'
   courseInput.name = 'course'
+  courseInput.id = 'task-course'
 
   const dueDateInput = document.createElement('input')
   dueDateInput.type = 'date'
   dueDateInput.name = 'dueDate'
+  dueDateInput.id = 'task-due-date'
 
   const noteInput = document.createElement('textarea')
   noteInput.name = 'note'
+  noteInput.id = 'task-note'
 
   const titleError = document.createElement('p')
   const dueDateError = document.createElement('p')
 
+  const row = document.createElement('div')
+  row.classList.add('form-row')
+  row.append(
+    createField('Judul', titleInput, titleError),
+    createField('Mata Kuliah', courseInput),
+  )
+
   const submitButton = document.createElement('button')
   submitButton.type = 'submit'
+  submitButton.classList.add('button-primary')
   submitButton.textContent = 'Tambah Tugas'
 
   form.append(
-    createField('Judul', titleInput, titleError),
-    createField('Mata Kuliah', courseInput),
+    heading,
+    row,
     createField('Tenggat', dueDateInput, dueDateError),
     createField('Catatan', noteInput),
     submitButton,
