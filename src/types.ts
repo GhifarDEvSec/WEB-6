@@ -26,3 +26,9 @@ export interface DueDateParts {
   day: string
   month: string
 }
+
+export interface TaskSummary {
+  total: number
+  belumSelesai: number
+  selesai: number
+}

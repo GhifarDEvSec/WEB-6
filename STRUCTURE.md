@@ -21,6 +21,8 @@
     config.ts
     components/
       taskForm.ts
+      taskFilter.ts
+      summaryPanel.ts
       taskList.ts
       taskItem.ts
       emptyState.ts
@@ -47,18 +49,20 @@
 - PROGRESS.md: catatan status pengerjaan tiap tahap.
 - STRUCTURE.md: dokumentasi pohon direktori dan fungsi berkas.
 - public/favicon.svg: ikon centang di dalam kotak untuk favicon.
-- src/main.ts: memuat font dan CSS, lalu merender form serta daftar tugas.
+- src/main.ts: mengatur state tugas dan filter, lalu merender semua bagian.
 - src/vite-env.d.ts: deklarasi tipe untuk variabel VITE_ pada ImportMetaEnv.
-- src/types.ts: tipe Task, TaskId, TaskStatus, TaskFilter, TaskInput, AppConfig, dan DueDateParts.
+- src/types.ts: tipe Task, TaskId, TaskStatus, TaskFilter, TaskInput, AppConfig, DueDateParts, dan TaskSummary.
 - src/config.ts: membaca variabel lingkungan menjadi objek appConfig.
 - src/components/taskForm.ts: form tambah tugas beserta validasi dan label terhubung.
-- src/components/taskList.ts: merender daftar tugas terurut atau empty state.
-- src/components/taskItem.ts: kartu tugas dengan blok tanggal, chip mata kuliah, dan badge status.
-- src/components/emptyState.ts: kartu kosong dengan ilustrasi SVG buku dan centang.
+- src/components/taskFilter.ts: tombol filter Semua, Belum Selesai, dan Selesai dengan aria-pressed.
+- src/components/summaryPanel.ts: panel tiga angka Total, Belum Selesai, dan Selesai.
+- src/components/taskList.ts: merender daftar terfilter atau empty state sesuai filter.
+- src/components/taskItem.ts: kartu tugas dengan tanggal, chip, badge, dan pengubah status.
+- src/components/emptyState.ts: kartu kosong dengan ilustrasi dan teks yang dapat disesuaikan.
 - src/services/storageService.ts: memuat dan menyimpan data ke localStorage.
-- src/services/taskService.ts: memuat dan menambah tugas pada localStorage.
+- src/services/taskService.ts: memuat, menambah, mengubah status, memfilter, dan meringkas tugas.
 - src/styles/tokens.css: token warna, jarak, tipografi, bayangan, dan animasi.
 - src/styles/base.css: reset, latar paper berpola titik, header, footer, dan fokus.
-- src/styles/components.css: gaya form, tombol, kartu tugas, badge, dan empty state.
+- src/styles/components.css: gaya form, tombol, filter, ringkasan, kartu tugas, badge, dan empty state.
 - src/utils/collection.ts: pencarian, penghapusan, dan pembaruan item pada array.
 - src/utils/date.ts: format tenggat, bagian tanggal, dan pengecekan keterlambatan.

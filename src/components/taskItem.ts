@@ -1,4 +1,4 @@
-import type { Task } from '../types'
+import type { Task, TaskId } from '../types'
 import { formatDueDate, getDueDateParts, isOverdue } from '../utils/date'
 
 function createStatusBadge(task: Task, overdue: boolean): HTMLSpanElement {
@@ -22,13 +22,42 @@ function createStatusBadge(task: Task, overdue: boolean): HTMLSpanElement {
   return badge
 }
 
-export function createTaskItem(task: Task): HTMLElement {
+function createStatusToggle(task: Task, onToggle: (id: TaskId) => void): HTMLLabelElement {
+  const wrapper = document.createElement('label')
+  wrapper.classList.add('task-toggle')
+
+  const checkbox = document.createElement('input')
+  checkbox.type = 'checkbox'
+  checkbox.checked = task.status === 'selesai'
+  checkbox.setAttribute(
+    'aria-label',
+    checkbox.checked
+      ? `Tandai "${task.title}" sebagai belum selesai`
+      : `Tandai "${task.title}" sebagai selesai`,
+  )
+
+  checkbox.addEventListener('change', () => {
+    onToggle(task.id)
+  })
+
+  wrapper.append(checkbox)
+  return wrapper
+}
+
+export function createTaskItem(
+  task: Task,
+  onToggle: (id: TaskId) => void,
+): HTMLElement {
   const overdue = isOverdue(task)
   const item = document.createElement('article')
   item.classList.add('task-card')
 
   if (overdue) {
     item.classList.add('task-card--overdue')
+  }
+
+  if (task.status === 'selesai') {
+    item.classList.add('task-card--done')
   }
 
   const dueDateParts = getDueDateParts(task.dueDate)
@@ -76,7 +105,7 @@ export function createTaskItem(task: Task): HTMLElement {
 
   const meta = document.createElement('div')
   meta.classList.add('task-meta')
-  meta.append(createStatusBadge(task, overdue))
+  meta.append(createStatusToggle(task, onToggle), createStatusBadge(task, overdue))
 
   item.append(dateBlock, content, meta)
   return item

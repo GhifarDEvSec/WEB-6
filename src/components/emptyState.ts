@@ -37,17 +37,20 @@ function createIllustration(): SVGSVGElement {
   return illustration
 }
 
-export function createEmptyState(): HTMLElement {
+export function createEmptyState(
+  titleText = 'Belum ada tugas',
+  descriptionText = 'Tambahkan tugas baru lewat form di atas.',
+): HTMLElement {
   const wrapper = document.createElement('div')
   wrapper.classList.add('empty-state')
 
   const title = document.createElement('p')
   title.classList.add('empty-state__title')
-  title.textContent = 'Belum ada tugas'
+  title.textContent = titleText
 
   const description = document.createElement('p')
   description.classList.add('empty-state__description')
-  description.textContent = 'Tambahkan tugas baru lewat form di atas.'
+  description.textContent = descriptionText
 
   wrapper.append(createIllustration(), title, description)
   return wrapper
