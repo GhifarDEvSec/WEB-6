@@ -1,16 +1,20 @@
 # PROGRESS
 
-## Main 2 dari 5 - Tipe Data, Config, Penyimpanan
+## Main 3 dari 5 - Service, Daftar Tugas, Form Tambah
 
 Status: Selesai
 
 ### Berkas dibuat
-- src/types.ts
-- src/config.ts
-- src/services/storageService.ts
-- src/utils/collection.ts
+- src/utils/date.ts
+- src/services/taskService.ts
+- src/components/taskForm.ts
+- src/components/taskList.ts
+- src/components/taskItem.ts
+- src/components/emptyState.ts
 
 ### Berkas diubah
+- package.json
+- package-lock.json
 - src/main.ts
 - PROGRESS.md
 - STRUCTURE.md
@@ -19,4 +23,4 @@ Status: Selesai
 - Tidak ada.
 
 ### Belum selesai
-- Logika tugas dikerjakan pada Main 3.
+- Fitur lanjutan dikerjakan pada tahap berikutnya.

@@ -19,10 +19,17 @@
     vite-env.d.ts
     types.ts
     config.ts
+    components/
+      taskForm.ts
+      taskList.ts
+      taskItem.ts
+      emptyState.ts
     services/
       storageService.ts
+      taskService.ts
     utils/
       collection.ts
+      date.ts
 ```
 
 - index.html: kerangka halaman berbahasa Indonesia dengan judul, subjudul, kontainer bagian, dan pemuat modul.
@@ -36,9 +43,15 @@
 - PROGRESS.md: catatan status pengerjaan tiap tahap.
 - STRUCTURE.md: dokumentasi pohon direktori dan fungsi berkas.
 - public/favicon.svg: ikon centang di dalam kotak untuk favicon.
-- src/main.ts: menampilkan nama aplikasi pada judul serta nama dan versi pada footer.
+- src/main.ts: memuat tugas, merender form dan daftar, serta menangani tambah tugas.
 - src/vite-env.d.ts: deklarasi tipe untuk variabel VITE_ pada ImportMetaEnv.
 - src/types.ts: tipe Task, TaskId, TaskStatus, TaskFilter, TaskInput, dan AppConfig.
 - src/config.ts: membaca variabel lingkungan menjadi objek appConfig.
+- src/components/taskForm.ts: form tambah tugas beserta validasi judul dan tenggat.
+- src/components/taskList.ts: merender daftar tugas terurut atau empty state.
+- src/components/taskItem.ts: membangun satu item tugas dengan status dan penanda terlambat.
+- src/components/emptyState.ts: tampilan saat belum ada tugas.
 - src/services/storageService.ts: memuat dan menyimpan data ke localStorage.
+- src/services/taskService.ts: memuat dan menambah tugas pada localStorage.
 - src/utils/collection.ts: pencarian, penghapusan, dan pembaruan item pada array.
+- src/utils/date.ts: format tenggat Bahasa Indonesia dan pengecekan keterlambatan.
