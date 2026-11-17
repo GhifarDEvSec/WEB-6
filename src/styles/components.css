@@ -566,3 +566,220 @@
   gap: var(--space-3);
   margin-top: var(--space-5);
 }
+
+.about {
+  display: grid;
+  gap: var(--space-4);
+  padding: clamp(20px, 4vw, 32px);
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-offset);
+}
+
+.about__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.about__intro {
+  max-width: 60ch;
+  color: var(--color-ink-soft);
+}
+
+.about-topics {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.about-topic {
+  background: var(--color-paper);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-small);
+  overflow: hidden;
+}
+
+.about-topic__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  background: var(--color-surface);
+}
+
+.about-topic__summary::-webkit-details-marker {
+  display: none;
+}
+
+.about-topic__summary::after {
+  content: '+';
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  background: var(--color-highlight);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.about-topic[open] .about-topic__summary::after {
+  content: '-';
+  background: var(--color-accent);
+}
+
+.about-topic__content {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: var(--border);
+}
+
+.about-topic__points {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.about-topic__points li::marker {
+  color: var(--color-accent);
+}
+
+.about-code {
+  display: inline-block;
+  padding: 0 var(--space-1);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--color-surface);
+  border: 1px solid var(--color-ink-soft);
+  border-radius: var(--radius-sm);
+  overflow-wrap: anywhere;
+}
+
+.about-pipeline {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.about-pipeline__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.pipeline {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pipeline-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'index label'
+    'index description';
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-paper);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.pipeline-step__index {
+  grid-area: index;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  background: var(--color-highlight);
+  border: var(--border);
+  border-radius: 50%;
+}
+
+.pipeline-step__label {
+  grid-area: label;
+  font-weight: 700;
+}
+
+.pipeline-step__description {
+  grid-area: description;
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+@media (min-width: 768px) {
+  .pipeline {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .pipeline-step {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'index'
+      'label'
+      'description';
+    justify-items: start;
+  }
+
+  .pipeline-step:not(:last-child)::after {
+    content: '\2192';
+    position: absolute;
+    top: 50%;
+    right: calc(-1 * var(--space-4));
+    width: var(--space-4);
+    font-weight: 800;
+    text-align: center;
+    color: var(--color-accent);
+    transform: translateY(-50%);
+  }
+}
+
+.pipeline-step__label,
+.pipeline-step__description {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .pipeline {
+    gap: var(--space-2);
+  }
+
+  .pipeline-step {
+    padding: var(--space-2);
+  }
+
+  .pipeline-step__label {
+    font-size: var(--text-sm);
+  }
+
+  .pipeline-step__description {
+    font-size: var(--text-xs);
+  }
+
+  .pipeline-step:not(:last-child)::after {
+    right: calc(-1 * var(--space-2));
+    width: var(--space-2);
+  }
+}

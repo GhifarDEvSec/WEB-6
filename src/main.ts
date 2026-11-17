@@ -20,6 +20,7 @@ import { renderTaskForm } from './components/taskForm'
 import { renderTaskFilter } from './components/taskFilter'
 import { renderSummaryPanel } from './components/summaryPanel'
 import { renderTaskList } from './components/taskList'
+import { renderAboutSection } from './components/aboutSection'
 
 const titleElement = document.querySelector<HTMLHeadingElement>('#app-title')
 const footerElement = document.querySelector<HTMLElement>('#app-footer')
@@ -36,6 +37,7 @@ const formSection = document.querySelector<HTMLElement>('#form-section')
 const filterSection = document.querySelector<HTMLElement>('#filter-section')
 const summarySection = document.querySelector<HTMLElement>('#summary-section')
 const listSection = document.querySelector<HTMLElement>('#list-section')
+const aboutSection = document.querySelector<HTMLElement>('#about-section')
 
 let tasks: Task[] = getTasks()
 let activeFilter: TaskFilter = 'semua'
@@ -109,6 +111,10 @@ function renderAll(): void {
       },
     )
   }
+}
+
+if (aboutSection) {
+  renderAboutSection(aboutSection)
 }
 
 if (formSection) {
