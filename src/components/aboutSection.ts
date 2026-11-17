@@ -1,5 +1,5 @@
-import type { AboutItem, PipelineStep } from '../types'
-import { aboutItems, pipelineSteps } from '../data/aboutContent'
+import type { AboutItem } from '../types'
+import { aboutItems } from '../data/aboutContent'
 
 function appendInlineCode(text: string): DocumentFragment {
   const fragment = document.createDocumentFragment()
@@ -54,41 +54,6 @@ function createTopic(item: AboutItem, index: number): HTMLDetailsElement {
   return details
 }
 
-function createPipeline(steps: PipelineStep[]): HTMLDivElement {
-  const wrapper = document.createElement('div')
-  wrapper.classList.add('about-pipeline')
-
-  const title = document.createElement('h3')
-  title.classList.add('about-pipeline__title')
-  title.textContent = 'Alur dari Kode ke Website'
-
-  const list = document.createElement('ol')
-  list.classList.add('pipeline')
-
-  steps.forEach((step, index) => {
-    const item = document.createElement('li')
-    item.classList.add('pipeline-step')
-
-    const number = document.createElement('span')
-    number.classList.add('pipeline-step__index')
-    number.textContent = String(index + 1)
-
-    const label = document.createElement('span')
-    label.classList.add('pipeline-step__label')
-    label.textContent = step.label
-
-    const description = document.createElement('span')
-    description.classList.add('pipeline-step__description')
-    description.textContent = step.description
-
-    item.append(number, label, description)
-    list.append(item)
-  })
-
-  wrapper.append(title, list)
-  return wrapper
-}
-
 export function renderAboutSection(container: HTMLElement): void {
   container.replaceChildren()
 
@@ -111,6 +76,6 @@ export function renderAboutSection(container: HTMLElement): void {
     topics.append(createTopic(item, index))
   })
 
-  wrapper.append(title, intro, topics, createPipeline(pipelineSteps))
+  wrapper.append(title, intro, topics)
   container.append(wrapper)
 }

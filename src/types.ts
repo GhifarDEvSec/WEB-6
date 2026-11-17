@@ -44,7 +44,3 @@ export interface AboutItem {
   points: string[]
 }
 
-export interface PipelineStep {
-  label: string
-  description: string
-}

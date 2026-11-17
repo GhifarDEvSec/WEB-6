@@ -1,5 +1,5 @@
 import { appConfig } from '../config'
-import type { AboutItem, PipelineStep } from '../types'
+import type { AboutItem } from '../types'
 
 export const aboutItems: AboutItem[] = [
   {
@@ -67,29 +67,3 @@ export const aboutItems: AboutItem[] = [
   },
 ]
 
-export const pipelineSteps: PipelineStep[] = [
-  {
-    label: 'Kode TypeScript',
-    description: 'Komponen, tipe, dan logika ditulis dalam berkas .ts.',
-  },
-  {
-    label: 'Pemeriksaan tipe',
-    description: 'tsc --noEmit memeriksa kesalahan tipe.',
-  },
-  {
-    label: 'Transpile ke JavaScript',
-    description: 'Oxc melalui Rolldown mengubah TypeScript menjadi JavaScript.',
-  },
-  {
-    label: 'Bundle',
-    description: 'Rolldown menyatukan modul dan aset.',
-  },
-  {
-    label: 'Folder dist',
-    description: 'Hasil build siap dipasang.',
-  },
-  {
-    label: 'Website pribadi',
-    description: 'Berkas dist diunggah ke subfolder sesuai VITE_BASE_PATH.',
-  },
-]
