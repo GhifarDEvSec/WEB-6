@@ -1,19 +1,17 @@
 # PROGRESS
 
-## Branch 1 - Edit dan Hapus Tugas
+## Branch 2 - Tentang Proyek dan README
 
 Status: Selesai
 
 ### Berkas dibuat
-- src/components/confirmDialog.ts
+- src/components/aboutSection.ts
+- src/data/aboutContent.ts
+- README.md
 
 ### Berkas diubah
-- src/types.ts
-- src/services/taskService.ts
-- src/components/taskForm.ts
-- src/components/taskItem.ts
-- src/components/taskList.ts
 - src/main.ts
+- src/types.ts
 - src/styles/components.css
 - PROGRESS.md
 - STRUCTURE.md
@@ -22,4 +20,4 @@ Status: Selesai
 - Tidak ada.
 
 ### Belum selesai
-- Bagian Tentang Proyek dikerjakan pada Branch 2.
+- Tidak ada.

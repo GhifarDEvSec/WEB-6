@@ -37,3 +37,14 @@ export interface FormMode {
   mode: 'tambah' | 'ubah'
   taskId: TaskId | null
 }
+
+export interface AboutItem {
+  title: string
+  body: string
+  points: string[]
+}
+
+export interface PipelineStep {
+  label: string
+  description: string
+}
