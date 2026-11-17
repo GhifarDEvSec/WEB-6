@@ -76,8 +76,4 @@ Setelah itu jalankan `npm run build` kembali dan unggah isi folder `dist` ke sub
 - Pekerjaan utama berada di branch `main`.
 - Setiap fitur dikerjakan di branch terpisah, misalnya `feature/edit-hapus` dan `feature/tentang-proyek`.
 - Perubahan di branch fitur digabungkan ke `main` melalui Pull Request agar bisa ditinjau lebih dulu.
-- Merge conflict terjadi bila dua branch mengubah baris yang sama. Penyelesaiannya: buka berkas yang berkonflik, pilih versi yang dipakai, hapus penanda konflik, jalankan `git add`, lalu `git commit`.
-
-## Catatan Penggunaan AI
-
-Kode pada proyek ini ditulis dengan bantuan AI agent. Seluruh operasi Git, termasuk branch, commit, merge, penyelesaian konflik, dan Pull Request, dijalankan oleh pemilik proyek.
+- Merge conflict terjadi bila dua branch mengubah baris yang sama. Penyelesaiannya: buka berkas yang berkonflik, pilih versi yang dipakai, hapus penanda konflik, jalankan `git add`, lalu `git commit`
