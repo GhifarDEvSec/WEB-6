@@ -1,19 +1,18 @@
 # PROGRESS
 
-## Main 5 dari 5 - Status, Filter, Ringkasan
+## Branch 1 - Edit dan Hapus Tugas
 
 Status: Selesai
 
 ### Berkas dibuat
-- src/components/taskFilter.ts
-- src/components/summaryPanel.ts
+- src/components/confirmDialog.ts
 
 ### Berkas diubah
 - src/types.ts
 - src/services/taskService.ts
+- src/components/taskForm.ts
 - src/components/taskItem.ts
 - src/components/taskList.ts
-- src/components/emptyState.ts
 - src/main.ts
 - src/styles/components.css
 - PROGRESS.md
@@ -23,4 +22,4 @@ Status: Selesai
 - Tidak ada.
 
 ### Belum selesai
-- Fitur edit dan hapus dikerjakan pada tahap branch terpisah.
+- Bagian Tentang Proyek dikerjakan pada Branch 2.

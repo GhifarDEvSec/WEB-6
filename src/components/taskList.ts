@@ -1,5 +1,6 @@
-import type { Task, TaskFilter, TaskId } from '../types'
+import type { Task, TaskFilter } from '../types'
 import { createEmptyState } from './emptyState'
+import type { TaskItemHandlers } from './taskItem'
 import { createTaskItem } from './taskItem'
 
 interface EmptyMessage {
@@ -31,7 +32,7 @@ export function renderTaskList(
   tasks: Task[],
   activeFilter: TaskFilter,
   hasAnyTask: boolean,
-  onToggle: (id: TaskId) => void,
+  handlers: TaskItemHandlers,
 ): void {
   container.replaceChildren()
 
@@ -45,7 +46,7 @@ export function renderTaskList(
   list.classList.add('task-list')
 
   sortByDueDate(tasks).forEach((task) => {
-    list.append(createTaskItem(task, onToggle))
+    list.append(createTaskItem(task, handlers))
   })
 
   container.append(list)
