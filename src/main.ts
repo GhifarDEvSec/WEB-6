@@ -4,14 +4,18 @@ import './styles/tokens.css'
 import './styles/base.css'
 import './styles/components.css'
 import { appConfig } from './config'
-import type { Task, TaskFilter, TaskId } from './types'
+import type { FormMode, Task, TaskFilter, TaskId } from './types'
 import {
   addTask,
+  deleteTask,
   filterTasks,
   getTasks,
   summarizeTasks,
   toggleTaskStatus,
+  updateTask,
 } from './services/taskService'
+import { confirmDelete } from './components/confirmDialog'
+import type { TaskFormController } from './components/taskForm'
 import { renderTaskForm } from './components/taskForm'
 import { renderTaskFilter } from './components/taskFilter'
 import { renderSummaryPanel } from './components/summaryPanel'
@@ -35,9 +39,45 @@ const listSection = document.querySelector<HTMLElement>('#list-section')
 
 let tasks: Task[] = getTasks()
 let activeFilter: TaskFilter = 'semua'
+let formMode: FormMode = { mode: 'tambah', taskId: null }
+let formController: TaskFormController | null = null
 
 function handleToggle(id: TaskId): void {
   tasks = toggleTaskStatus(id)
+  renderAll()
+}
+
+function handleEdit(id: TaskId): void {
+  const task = tasks.find((item) => item.id === id)
+
+  if (!task || !formController) {
+    return
+  }
+
+  formMode = { mode: 'ubah', taskId: id }
+  formController.startEdit(task)
+}
+
+async function handleDelete(id: TaskId): Promise<void> {
+  const task = tasks.find((item) => item.id === id)
+
+  if (!task) {
+    return
+  }
+
+  const confirmed = await confirmDelete(task.title)
+
+  if (!confirmed) {
+    return
+  }
+
+  tasks = deleteTask(id)
+
+  if (formMode.mode === 'ubah' && formMode.taskId === id) {
+    formMode = { mode: 'tambah', taskId: null }
+    formController?.resetToAdd()
+  }
+
   renderAll()
 }
 
@@ -62,16 +102,29 @@ function renderAll(): void {
       filterTasks(tasks, activeFilter),
       activeFilter,
       tasks.length > 0,
-      handleToggle,
+      {
+        onToggle: handleToggle,
+        onEdit: handleEdit,
+        onDelete: handleDelete,
+      },
     )
   }
 }
 
 if (formSection) {
-  renderTaskForm(formSection, {
-    onSubmit: (input) => {
-      tasks = addTask(input)
+  formController = renderTaskForm(formSection, {
+    onSubmit: (input, mode) => {
+      if (mode.mode === 'ubah' && mode.taskId !== null) {
+        tasks = updateTask(mode.taskId, input)
+      } else {
+        tasks = addTask(input)
+      }
+
+      formMode = { mode: 'tambah', taskId: null }
       renderAll()
+    },
+    onCancel: () => {
+      formMode = { mode: 'tambah', taskId: null }
     },
   })
 }

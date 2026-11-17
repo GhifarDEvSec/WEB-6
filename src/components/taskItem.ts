@@ -1,6 +1,12 @@
 import type { Task, TaskId } from '../types'
 import { formatDueDate, getDueDateParts, isOverdue } from '../utils/date'
 
+export interface TaskItemHandlers {
+  onToggle: (id: TaskId) => void
+  onEdit: (id: TaskId) => void
+  onDelete: (id: TaskId) => void
+}
+
 function createStatusBadge(task: Task, overdue: boolean): HTMLSpanElement {
   const badge = document.createElement('span')
   badge.classList.add('badge')
@@ -22,7 +28,10 @@ function createStatusBadge(task: Task, overdue: boolean): HTMLSpanElement {
   return badge
 }
 
-function createStatusToggle(task: Task, onToggle: (id: TaskId) => void): HTMLLabelElement {
+function createStatusToggle(
+  task: Task,
+  onToggle: (id: TaskId) => void,
+): HTMLLabelElement {
   const wrapper = document.createElement('label')
   wrapper.classList.add('task-toggle')
 
@@ -44,10 +53,36 @@ function createStatusToggle(task: Task, onToggle: (id: TaskId) => void): HTMLLab
   return wrapper
 }
 
-export function createTaskItem(
+function createActionButtons(
   task: Task,
-  onToggle: (id: TaskId) => void,
-): HTMLElement {
+  handlers: TaskItemHandlers,
+): HTMLDivElement {
+  const actions = document.createElement('div')
+  actions.classList.add('task-actions')
+
+  const editButton = document.createElement('button')
+  editButton.type = 'button'
+  editButton.classList.add('task-action')
+  editButton.textContent = 'Ubah'
+  editButton.setAttribute('aria-label', `Ubah tugas "${task.title}"`)
+  editButton.addEventListener('click', () => {
+    handlers.onEdit(task.id)
+  })
+
+  const deleteButton = document.createElement('button')
+  deleteButton.type = 'button'
+  deleteButton.classList.add('task-action', 'task-action--danger')
+  deleteButton.textContent = 'Hapus'
+  deleteButton.setAttribute('aria-label', `Hapus tugas "${task.title}"`)
+  deleteButton.addEventListener('click', () => {
+    handlers.onDelete(task.id)
+  })
+
+  actions.append(editButton, deleteButton)
+  return actions
+}
+
+export function createTaskItem(task: Task, handlers: TaskItemHandlers): HTMLElement {
   const overdue = isOverdue(task)
   const item = document.createElement('article')
   item.classList.add('task-card')
@@ -103,9 +138,13 @@ export function createTaskItem(
     content.append(note)
   }
 
+  const status = document.createElement('div')
+  status.classList.add('task-status')
+  status.append(createStatusToggle(task, handlers.onToggle), createStatusBadge(task, overdue))
+
   const meta = document.createElement('div')
   meta.classList.add('task-meta')
-  meta.append(createStatusToggle(task, onToggle), createStatusBadge(task, overdue))
+  meta.append(status, createActionButtons(task, handlers))
 
   item.append(dateBlock, content, meta)
   return item

@@ -1,6 +1,6 @@
 import type { Task, TaskFilter, TaskId, TaskInput, TaskStatus, TaskSummary } from '../types'
 import { loadFromStorage, saveToStorage } from './storageService'
-import { updateById } from '../utils/collection'
+import { removeById, updateById } from '../utils/collection'
 
 const TASKS_STORAGE_KEY = 'daftar-tugas-kuliah:tasks'
 
@@ -34,6 +34,25 @@ export function toggleTaskStatus(id: TaskId): Task[] {
 
   const nextStatus: TaskStatus = targetTask.status === 'selesai' ? 'belum_selesai' : 'selesai'
   const updatedTasks = updateById<Task>(tasks, id, { status: nextStatus })
+  saveToStorage<Task[]>(TASKS_STORAGE_KEY, updatedTasks)
+  return updatedTasks
+}
+
+export function updateTask(id: TaskId, input: TaskInput): Task[] {
+  const tasks = getTasks()
+  const updatedTasks = updateById<Task>(tasks, id, {
+    title: input.title,
+    course: input.course,
+    dueDate: input.dueDate,
+    note: input.note,
+  })
+  saveToStorage<Task[]>(TASKS_STORAGE_KEY, updatedTasks)
+  return updatedTasks
+}
+
+export function deleteTask(id: TaskId): Task[] {
+  const tasks = getTasks()
+  const updatedTasks = removeById<Task>(tasks, id)
   saveToStorage<Task[]>(TASKS_STORAGE_KEY, updatedTasks)
   return updatedTasks
 }

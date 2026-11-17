@@ -32,3 +32,8 @@ export interface TaskSummary {
   belumSelesai: number
   selesai: number
 }
+
+export interface FormMode {
+  mode: 'tambah' | 'ubah'
+  taskId: TaskId | null
+}
